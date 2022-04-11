@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Upload{% endblock %}
+
+{% block content %}
+<form method="POST">
+    <h3 class="text-dark" align="center">Delete</h3>
+        <div class="from-group">
+            <label class="text-dark" for="product_id">product ID</label>
+            <input type="text" class="form-control" id="product_id" name="product_id" placeholder="Enter Product ID">
+        </div>
+        <br>
+        <div>
+            <button type="submit" class="btn btn-outline-secondary">Delete</button>
+        </div>
+</form>
+
+{% endblock %}

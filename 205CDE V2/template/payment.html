@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Payment{% endblock %}
+
+{% block content %}
+{% for item in order %}
+<!-- <div class="container"> -->
+    <form method="POST">
+        <h3 class="text-dark" align="center">Payment</h1>
+        <div class="from-group">
+            <label class="text-dark" for="firstName">Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" value="{{ session['firstName'] }}">
+        </div>
+        <br>
+        <div class="from-group">
+            <label class="text-dark" for="password2">From</label>
+            <input type="date" class="form-control" id="startDay" name="startDay" placeholder="Choose number of days">
+        </div>
+        <br>
+        <div class="from-group">
+            <label class="text-dark" for="password2">To</label>
+            <input type="date" class="form-control" id="endDay" name="endDay" placeholder="Choose number of days">
+        </div>
+        <br>
+        <div class="from-group">
+            <label class="text-dark" for="password2">Price</label>
+            <input type="number" class="form-control" id="price" name="price" value="{{ item.price }}">
+        </div>
+        <br>
+        <div class="from-group">
+            <label class="text-dark" for="detail_id">Detail ID</label>
+            <input type="number" class="form-control" id="detail_id" name="detail_id" value="{{ item.detail_id }}">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-outline-secondary">Submit</button>
+    </form>
+</div>
+{% endfor %}
+{% endblock %}
