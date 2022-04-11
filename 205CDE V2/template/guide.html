@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Party{% endblock %}
+
+{% block content %}
+<!-- <div class="container"> -->
+    <h1 class="text-dark">Let's find the best tour guide</h1>
+</div>
+
+<div class="container">
+    {% for item in post %}
+    <div class="row">
+        <div class="col-md-5">
+            <div class="container">
+                <img src="{{ url_for('static', filename='image/oli-woodman-fwYZ3B_QQco-unsplash.jpg') }}" 
+                alt="oli-woodman-fwYZ3B_QQco-unsplash" class="img-thumbnail">                
+            </div>
+        </div>        
+        <div class="col-md-7">
+            <header class="article-header">
+                <div>
+                    <div class="category-title text-dark">
+                        Article
+                        <span class="date">{{ item.date }}</span>
+                    </div>
+                </div>
+                <h2 class="article-title text-dark">
+                    {{ item.title }}
+                </h2>
+            </header>
+            <div class="author">
+                <div class="profile"></div>
+                <div class="info">
+                    <div class="caption">Author</div>
+                    <div class="name text-dark">{{ item.user_name }}</div>
+                </div>
+            </div>
+            <div class="tags">
+                <div class="text-dark">Price</div>
+                <div class="text-dark">{{ item.price }}</div>
+            </div>
+            {% if session.loggedin %}
+            <a href="{{ url_for('purchase', product_id = product_id) }}"><button type="button" class="btn btn-outline-secondary">
+                Reserve
+              </button></a>
+            {% endif%}
+        </div>
+    </div>
+    <br>
+    {% endfor %}
+</div>
+{% endblock %}

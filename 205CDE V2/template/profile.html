@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<!-- <div class="container"> -->
+    <div>
+        <p class="profileText">Your account details are below:</p>
+    </div>
+    <!-- user info table -->
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Password</th>
+            <th scope="col">Email</th>
+            <th scope="col">Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ account['customer_id'] }}</td>
+            <td>{{ account['name'] }}</td>
+            <td>{{ account['password1'] }}</td>
+            <td>{{ account['email'] }}</td>
+            <td>
+              <form method="post" action="/updateUser">
+                <a href="{{ url_for('updateUser') }}" class="btn btn-outline-secondary" role="button" aria-pressed="true">Update</a>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+    <br>
+    <p class="profileText">Uploaded Info:</p>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Product ID</th>
+            <th scope="col">Title</th>
+            <th scope="col">Type</th>
+            <th scope="col">Date</th>
+            <th scope="col">Price</th>
+            <th scope="col">Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+            {% for item in profile %}
+          <tr>
+            <td>{{ item.product_id }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.product_type }}</td>
+            <td>{{ item.date }}</td>
+            <td>{{ item.price }}</td>
+            <td>
+              <div class="uploadForm">
+                <form method="post" action="/updateProduct">
+                    <a href="{{ url_for('updateProduct') }}" class="btn btn-outline-secondary" role="button" aria-pressed="true">Update</a>
+                    <!-- <a href="/updateProduct/{{item.product_id}}" class="btn btn-outline-secondary" role="button" aria-pressed="true">Update</a> -->
+                <!-- <form method="post" action="/deleteProduct"> -->
+                    <!-- <a href="{{ url_for('deleteProduct') }}" class="btn btn-outline-danger" role="button" aria-pressed="true">Delete</a>
+                </form> -->
+                <!-- <a href="{{ url_for('deleteProduct', product_id = product_id) }}"><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                  Delete
+                </button></a> -->
+                <a href="/login/profile/deleteProduct" class="btn btn-danger btn-delete btn-sm">delete</a>
+                <!-- <a href="{{ item.product_id }}"><button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                  Delete
+                </button></a> -->
+              </form>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Delete Post</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Do you really want to delete?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <form action="{{ url_for('deleteProduct') }}" method="POST">
+              <input class="btn btn-outline-danger" type="submit" value="Delete">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
